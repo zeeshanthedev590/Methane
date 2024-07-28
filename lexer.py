@@ -55,10 +55,7 @@ class Lexer:
                 match = pattern.match(code, pos)
                 if match:
                     text = match.group(0)
-                    if (
-                        name != "WHITESPACE" and name != "COMMENTS"
-                    ):  # Skip whitespace and comments
-                        # Check if the identifier is a keyword
+                    if name != "WHITESPACE" and name != "COMMENTS":
                         if name == "ID" and text in self.keywords:
                             tokens.append((self.keywords[text], text))
                         else:
@@ -70,5 +67,5 @@ class Lexer:
         return tokens
 
 
-# Sample Usage
+# Lexer instance
 lexer = Lexer(token_specification, KEYWORDS)

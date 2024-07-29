@@ -1,4 +1,4 @@
-from lexer import lexer
+from lexer import code
 
 
 class Parser:
@@ -16,5 +16,14 @@ class Parser:
 
         remaining_tokens_count = len(self.tokens) - self.current_token_index - 1
 
-    def eat(self):
-        pass
+    def eat(self, expected_token_type):
+        if self.current_token[0] != expected_token_type:
+            print(
+                "Error: Expected", expected_token_type, "but got", self.current_token[0]
+            )
+        else:
+            self.advance()
+
+
+# Initialize the parser with the test tokens
+parser = Parser(code)

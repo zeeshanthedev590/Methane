@@ -69,3 +69,9 @@ class Lexer:
 
 # Lexer instance
 lexer = Lexer(token_specification, KEYWORDS)
+code = """
+cook x = 5
+cook y = "good"
+"""
+code = lexer.tokenize(code)
+print(code)

@@ -4,3 +4,4 @@
 - [x] make a lexer
 - [ ] make a parser
 - [ ] combine the lexer and parser to form a interpreter
+- [ ] Add comments to the codebase

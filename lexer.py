@@ -12,7 +12,7 @@ KEYWORDS = {
 }
 
 TOKENS = [
-    ("NUMBER", r"\d+"),
+    ("NUMBER", r"\d+(\.\d*)?"),
     ("LBRACE", r"\{"),
     ("RBRACE", r"\}"),
     ("LPAREN", r"\("),
@@ -70,8 +70,7 @@ class Lexer:
 # Lexer instance
 lexer = Lexer(token_specification, KEYWORDS)
 code = """
-cook x = 5
-cook y = "good"
+cook x = 12/21
 """
 code = lexer.tokenize(code)
 print(code)

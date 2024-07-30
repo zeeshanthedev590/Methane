@@ -27,19 +27,74 @@ class Parser:
             self.advance()
             return value
 
-    def parse_var(self):
-        self.eat("VARS")
-        var_name = self.eat("ID")
-        self.eat("ASSIGN")
+    def parse_expression(self):
+        # Simple expression parser: handles +, -, *, /
+        # Assumes tokens are in correct order without parentheses
+        result = self.parse_term()
+        while self.current_token and self.current_token[0] in {"PLUS", "MINUS"}:
+            operator = self.eat(self.current_token[0])
+            right = self.parse_term()
+            if operator == "+":
+                result += right
+            elif operator == "-":
+                result -= right
+        return result
 
-        value_type = self.current_token[0]
-        if value_type in {"NUMBER", "STRING", "ID"}:
-            value = self.eat(value_type)
+    def parse_term(self):
+        # Handles * and / operators
+        result = self.parse_factor()
+        while self.current_token and self.current_token[0] in {"MULTIPLY", "DIVIDE"}:
+            operator = self.eat(self.current_token[0])
+            right = self.parse_factor()
+            if operator == "*":
+                result *= right
+            elif operator == "/":
+                result /= right
+        return result
+
+    def parse_factor(self):
+        # Handles numbers and variables
+        token_type = self.current_token[0]
+        if token_type == "NUMBER":
+            return float(self.eat("NUMBER"))
+        elif token_type == "ID":
+            var_name = self.eat("ID")
+            if var_name in self.variables:
+                return self.variables[var_name]
+            else:
+                raise ValueError(f"Undefined variable: {var_name}")
         else:
-            raise ValueError(f"Expected NUMBER, STRING, or ID, but got {value_type}")
+            raise ValueError(f"Unexpected token: {token_type}")
 
-        self.variables[var_name] = value
-        print(f"Parsed variable: {var_name} = {value}")
+    def parse_var(self):
+        while self.current_token:
+            if self.current_token[0] == "VARS":
+                self.eat("VARS")
+                var_name = self.eat("ID")
+                self.eat("ASSIGN")
+                value_type = self.current_token[0]
+                if value_type in {
+                    "NUMBER",
+                    "STRING",
+                    "ID",
+                    "PLUS",
+                    "MINUS",
+                    "MULTIPLY",
+                    "DIVIDE",
+                }:
+                    value = self.parse_expression()
+                else:
+                    raise ValueError(
+                        f"Expected NUMBER, STRING, or ID, but got {value_type}"
+                    )
+                self.variables[var_name] = value
+                # Comment this out later(only here for debugging)
+                print(f"Parsed variable: {var_name} = {value}")
+            elif self.current_token[0] in {"OUTPUT", "INPUT", "IF", "TILL", "FOR"}:
+                # Handle other types of statements if needed
+                self.advance()  # Skip over the current token
+            else:
+                self.advance()  # Skip over the current token
 
 
 # ----------------------------------------------------#

@@ -1,7 +1,10 @@
-# Methane programming language (in developement)
+# Methane programming language (under developement)
 
 - [x] make a list of tokens and keywords
 - [x] make a lexer
-- [ ] make a parser
-- [ ] combine the lexer and parser to form a interpreter
+- [x] make a parser
+  - [x] Variables
+  - [x] Input
+  - [x] Output
+- [ ] Make the main program interface
 - [ ] Add comments to the codebase

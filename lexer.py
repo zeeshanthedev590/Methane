@@ -30,6 +30,7 @@ TOKENS = [
     ("QUOTE", r"'"),
     ("STRING", r"'[^']*'|\"[^\"]*\""),
     ("COMMENTS", r"//.*"),
+    ("AMPERSAND", r"&"),
     ("ID", r"[a-zA-Z_][a-zA-Z0-9_]*"),
 ]
 
@@ -70,7 +71,12 @@ class Lexer:
 # Lexer instance
 lexer = Lexer(token_specification, KEYWORDS)
 code = """
-cook x = 12/21
+cook x = 0
+puts(x)
+puts("Enter the value:")
+gets(&x)
+cook y = x-1
+puts(y)
 """
 code = lexer.tokenize(code)
 print(code)

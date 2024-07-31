@@ -1,9 +1,4 @@
-cook x=0
-cook z = 0
-cook y = 0
-puts("value of x is")
-puts(x)
-puts("Enter a value for z:")
-gets(&z)
-cook y = x-z
-puts(y)
+# Variable declaration
+cook x = 0 
+cook z = 0 
+cook y = 0 

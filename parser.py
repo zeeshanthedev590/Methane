@@ -1,3 +1,4 @@
+# For testing
 # from lexer import code
 
 
@@ -124,7 +125,7 @@ class Parser:
                 self.advance()
 
 
-# ----------------------------------------------------#
+# ----------------Testing only------------------------#
 # Parser instance
 # parser = Parser(code)
 # parser.parse()

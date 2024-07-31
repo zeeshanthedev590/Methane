@@ -6,6 +6,7 @@
   - [x] Variables
   - [x] Input
   - [x] Output
+  - [x] Comments
   - [ ] Loops
   - [ ] If/else statements
   - [ ] Functions

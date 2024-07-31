@@ -29,7 +29,7 @@ TOKENS = [
     ("LT", r"<"),
     ("QUOTE", r"'"),
     ("STRING", r"'[^']*'|\"[^\"]*\""),
-    ("COMMENTS", r"//.*"),
+    ("COMMENTS", r"#.*"),
     ("AMPERSAND", r"&"),
     ("ID", r"[a-zA-Z_][a-zA-Z0-9_]*"),
 ]
@@ -47,6 +47,7 @@ class Lexer:
         self.keywords = keywords
 
     def tokenize(self, code):
+        # Dividing the code into tokens
         tokens = []
         pos = 0
         while pos < len(code):
@@ -57,6 +58,7 @@ class Lexer:
                 if match:
                     text = match.group(0)
                     if name != "WHITESPACE" and name != "COMMENTS":
+                        # Ignoring all whitespace and comments
                         if name == "ID" and text in self.keywords:
                             tokens.append((self.keywords[text], text))
                         else:

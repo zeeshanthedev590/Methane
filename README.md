@@ -1,6 +1,6 @@
 # Methane Programming Language (under development)
 
-"Blazing through code like a gas, but without the fuss!"
+> "Blazing through code like a gas, but without the fuss!"
 
 - [x] make a list of tokens and keywords
 - [x] make a lexer

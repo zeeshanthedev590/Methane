@@ -10,5 +10,7 @@
   - [ ] Loops
   - [ ] If/else statements
   - [ ] Functions
+  - [ ] File importing
+  - [ ] File I/O
 - [x] Make the main program interface
-- [ ] Add comments to the codebase
+- [x] Add comments to the codebase

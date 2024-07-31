@@ -1,4 +1,4 @@
-from lexer import code
+# from lexer import code
 
 
 class Parser:
@@ -125,5 +125,6 @@ class Parser:
 
 
 # ----------------------------------------------------#
-parser = Parser(code)
-parser.parse()
+# Parser instance
+# parser = Parser(code)
+# parser.parse()

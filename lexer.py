@@ -67,16 +67,11 @@ class Lexer:
                 raise RuntimeError(f"Unexpected character: {code[pos]}")
         return tokens
 
+    # Read code from a file (for the main interface)
+    def read_code_from_file(self, file_path):
+        with open(file_path, "r") as file:
+            return file.read()
+
 
 # Lexer instance
 lexer = Lexer(token_specification, KEYWORDS)
-code = """
-cook x = 0
-puts(x)
-puts("Enter the value:")
-gets(&x)
-cook y = x-1
-puts(y)
-"""
-code = lexer.tokenize(code)
-print(code)

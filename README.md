@@ -6,5 +6,8 @@
   - [x] Variables
   - [x] Input
   - [x] Output
+  - [ ] Loops
+  - [ ] If/else statements
+  - [ ] Functions
 - [ ] Make the main program interface
 - [ ] Add comments to the codebase

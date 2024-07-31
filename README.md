@@ -9,5 +9,5 @@
   - [ ] Loops
   - [ ] If/else statements
   - [ ] Functions
-- [ ] Make the main program interface
+- [x] Make the main program interface
 - [ ] Add comments to the codebase

@@ -1,11 +1,15 @@
+import os
+
+
 class Parser:
-    def __init__(self, tokens):
+    def __init__(self, tokens, script_path):
         self.tokens = tokens
         self.current_token_index = 0
         self.current_token = (
             self.tokens[self.current_token_index] if self.tokens else None
         )
         self.variables = {}
+        self.script_dir = os.path.dirname(script_path)
 
     def advance(self):
         """Move to the next token."""
@@ -118,8 +122,10 @@ class Parser:
 
         filename = self.eat("STRING").strip('"')
 
+        full_path = os.path.join(self.script_dir, filename)
+
         try:
-            file_handle = open(filename, "r+")
+            file_handle = open(full_path, "r+")
             self.variables[var_name] = file_handle
         except IOError as e:
             raise RuntimeError(f"Error opening file: {e}")

@@ -6,7 +6,7 @@ def main(file_path):
     code = lexer.read_code_from_file(file_path)
     tokens = lexer.tokenize(code)
 
-    parser = Parser(tokens)
+    parser = Parser(tokens, file_path)  # Pass the script file path here
     parser.parse()
 
 

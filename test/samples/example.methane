@@ -1,0 +1,6 @@
+cook x = "1"
+open fileVar = "./example.txt"
+read contentVar = fileVar
+puts(contentVar)
+write fileVar = x
+close fileVar

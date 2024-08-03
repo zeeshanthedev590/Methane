@@ -2,13 +2,18 @@ import re
 
 # Keywords and Tokens
 KEYWORDS = {
-    "DEC": "FUNCS",  # Functions
-    "cook": "VARS",  # Variables
-    "IF": "IF",  # IF statements
-    "TILL": "TILL",  # While loops are till loops
-    "FOR": "FOR",  # For loops
-    "gets": "INPUT",  # Input statements
-    "puts": "OUTPUT",  # Output statements
+    "DEC": "FUNCS",
+    "cook": "VARS",
+    "IF": "IF",
+    "WHILE": "WHILE",
+    "FOR": "FOR",
+    "ELSE": "ELSE",
+    "gets": "INPUT",
+    "puts": "OUTPUT",
+    "read": "READ",
+    "write": "WRITE",
+    "close": "CLOSE",
+    "open": "OPEN",
 }
 
 TOKENS = [
@@ -27,6 +32,10 @@ TOKENS = [
     ("ASSIGN", r"="),
     ("GT", r">"),
     ("LT", r"<"),
+    ("EQ", r"=="),
+    ("NEQ", r"!="),
+    ("LE", r"<="),
+    ("GE", r">="),
     ("QUOTE", r"'"),
     ("STRING", r"'[^']*'|\"[^\"]*\""),
     ("COMMENTS", r"#.*"),

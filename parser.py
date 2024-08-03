@@ -1,7 +1,3 @@
-# For testing
-# from lexer import code
-
-
 class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
@@ -113,6 +109,82 @@ class Parser:
         else:
             self.variables[var_name] = user_input
 
+    def parse_open(self):
+        self.eat("OPEN")
+
+        var_name = self.eat("ID")
+
+        self.eat("ASSIGN")
+
+        filename = self.eat("STRING").strip('"')
+
+        try:
+            file_handle = open(filename, "r+")
+            self.variables[var_name] = file_handle
+        except IOError as e:
+            raise RuntimeError(f"Error opening file: {e}")
+
+    def parse_read(self):
+        self.eat("READ")
+
+        var_name = self.eat("ID")
+
+        self.eat("ASSIGN")
+
+        file_var = self.eat("ID")
+
+        if file_var not in self.variables:
+            raise ValueError(f"Undefined file handle: {file_var}")
+
+        file_handle = self.variables[file_var]
+
+        try:
+            content = file_handle.read()
+            self.variables[var_name] = content
+        except IOError as e:
+            raise RuntimeError(f"Error reading file: {e}")
+
+    def parse_write(self):
+        self.eat("WRITE")
+        file_var = self.eat("ID")
+        self.eat("ASSIGN")
+
+        if self.current_token[0] == "STRING":
+            content = self.eat("STRING").strip('"')
+        elif self.current_token[0] == "ID":
+            content_var = self.eat("ID")
+            if content_var not in self.variables:
+                raise ValueError(f"Undefined variable: {content_var}")
+            content = self.variables[content_var]
+        else:
+            raise ValueError("Expected a STRING or an ID after assignment.")
+
+        if file_var not in self.variables:
+            raise ValueError(f"Undefined file handle: {file_var}")
+
+        file_handle = self.variables[file_var]
+
+        try:
+            file_handle.write(content + "\n")
+        except IOError as e:
+            raise RuntimeError(f"Error writing to file: {e}")
+
+    def parse_close(self):
+        self.eat("CLOSE")
+
+        file_var = self.eat("ID")
+
+        if file_var not in self.variables:
+            raise ValueError(f"Undefined file handle: {file_var}")
+
+        file_handle = self.variables[file_var]
+
+        try:
+            file_handle.close()
+            del self.variables[file_var]
+        except IOError as e:
+            raise RuntimeError(f"Error closing file: {e}")
+
     def parse(self):
         while self.current_token:
             if self.current_token[0] == "VARS":
@@ -121,11 +193,14 @@ class Parser:
                 self.parse_output()
             elif self.current_token[0] == "INPUT":
                 self.parse_input()
+            elif self.current_token[0] == "OPEN":
+                self.parse_open()
+            elif self.current_token[0] == "READ":
+                self.parse_read()
+            elif self.current_token[0] == "WRITE":
+                self.parse_write()
+            elif self.current_token[0] == "CLOSE":
+                self.parse_close()
+
             else:
                 self.advance()
-
-
-# ----------------Testing only------------------------#
-# Parser instance
-# parser = Parser(code)
-# parser.parse()

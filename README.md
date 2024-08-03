@@ -15,8 +15,6 @@
   - [ ] If/else statements
   - [ ] Functions
   - [ ] File importing
-  - [ ] File I/O
+  - [x] File I/O
 - [x] Make the main program interface
 - [x] Add comments to the codebase
-
-Docs being made in [Zacket](https://github.com/zeeshanthedev590/zacket)

@@ -1,4 +1,5 @@
 import os
+from lexer import lexer
 
 
 class Parser:
@@ -191,6 +192,28 @@ class Parser:
         except IOError as e:
             raise RuntimeError(f"Error closing file: {e}")
 
+    def parse_import(self):
+        """Parse an import statement to include another file."""
+        self.eat("IMPORT")
+        filename = self.eat("STRING").strip(
+            '"'
+        )  # Get the filename from the string token
+        full_path = os.path.join(self.script_dir, filename)  # Resolve the full path
+
+        if not os.path.isfile(full_path):
+            raise FileNotFoundError(f"File '{full_path}' not found")
+
+        with open(full_path, "r") as file:
+            file_content = file.read()
+
+        # Tokenize and parse the imported file's content
+        imported_tokens = lexer.tokenize(file_content)  # Corrected the usage
+        imported_parser = Parser(imported_tokens, full_path)
+        imported_parser.parse()
+
+        # Update variables with those from the imported file
+        self.variables.update(imported_parser.variables)
+
     def parse(self):
         while self.current_token:
             if self.current_token[0] == "VARS":
@@ -207,6 +230,8 @@ class Parser:
                 self.parse_write()
             elif self.current_token[0] == "CLOSE":
                 self.parse_close()
+            elif self.current_token[0] == "IMPORT":
+                self.parse_import()
 
             else:
                 self.advance()

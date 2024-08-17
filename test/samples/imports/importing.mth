@@ -1,0 +1,3 @@
+bring "other.mth"
+puts(x)
+puts(y)

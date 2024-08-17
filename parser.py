@@ -295,6 +295,7 @@ class Parser:
 
         # Update variables with those from the imported file
         self.variables.update(imported_parser.variables)
+        self.functions.update(imported_parser.functions)
 
     def parse(self):
         while self.current_token:

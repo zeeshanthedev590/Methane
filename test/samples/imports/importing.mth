@@ -1,3 +1,2 @@
 bring "other.mth"
-puts(x)
-puts(y)
+call greet(1,2)

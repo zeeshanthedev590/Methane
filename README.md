@@ -9,12 +9,16 @@
   - [x] Input
   - [x] Output
   - [x] Comments
+  - [x] File I/O
+  - [ ] Functions
+  - [ ] File importing
+    - [ ] Variables
+    - [ ] Functions
+  - [ ] If/else statements
   - [ ] Loops
     - [ ] For loops
     - [ ] while loops
-  - [ ] If/else statements
-  - [ ] Functions
-  - [ ] File importing
-  - [x] File I/O
+  - [ ] Arrays
+  - [ ] Dictionaries
 - [x] Make the main program interface
 - [x] Add comments to the codebase

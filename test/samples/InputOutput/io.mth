@@ -1,0 +1,8 @@
+cook x = 5
+puts("The value for x is:")
+puts(x)
+cook y = 0
+puts("Enter a value of y:")
+gets(&y)
+puts("now y is :")
+puts(y)

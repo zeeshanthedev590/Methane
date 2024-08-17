@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# Add all changes to the staging area
-git add .
+# Check for uncommitted changes
+if git diff-index --quiet HEAD --; then
+    echo "No changes to commit."
+else
+    # Add all changes to the staging area
+    git add .
 
-# Prompt for the commit message
-read -p "Enter commit message: " COMMIT_MESSAGE
+    # Prompt for the commit message
+    read -p "Enter commit message: " COMMIT_MESSAGE
 
-# Commit the changes with the provided message
-git commit -m "$COMMIT_MESSAGE"
+    # Commit the changes with the provided message
+    git commit -m "$COMMIT_MESSAGE"
+fi
 
 # Ask if the user wants to push the changes
 read -p "Do you want to push the changes to the remote repository? (y/n): " PUSH_CONFIRM

@@ -15,6 +15,7 @@ KEYWORDS = {
     "close": "CLOSE",
     "open": "OPEN",
     "bring": "IMPORT",
+    "call": "CALL",
 }
 
 TOKENS = [

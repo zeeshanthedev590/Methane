@@ -10,7 +10,7 @@
   - [x] Output
   - [x] Comments
   - [x] File I/O
-  - [ ] Functions
+  - [x] Functions
   - [ ] File importing
     - [ ] Variables
     - [ ] Functions

@@ -1,0 +1,6 @@
+DEC greet(a,b) {
+    cook x = a+b
+  puts(x)
+}
+
+call greet(1,2)

@@ -297,6 +297,106 @@ class Parser:
         self.variables.update(imported_parser.variables)
         self.functions.update(imported_parser.functions)
 
+    def parse_condition(self):
+        left = self.parse_expression()
+        if self.current_token is None:
+            raise ValueError("Expected a comparison operator but found end of input")
+
+        operator = self.current_token[0]
+        if operator not in {"GT", "LT", "EQ", "NEQ", "LE", "GE"}:
+            raise ValueError(f"Unsupported comparison operator: {operator}")
+
+        self.advance()  # Move to the next token after the operator
+        right = self.parse_expression()
+
+        if operator == "GT":
+            return left > right
+        elif operator == "LT":
+            return left < right
+        elif operator == "EQ":
+            return left == right
+        elif operator == "NEQ":
+            return left != right
+        elif operator == "LE":
+            return left <= right
+        elif operator == "GE":
+            return left >= right
+
+    def parse_if(self):
+        self.eat("IF")
+        self.eat("LPAREN")
+
+        # Parsing the condition properly
+        condition = self.parse_condition()
+
+        self.eat("RPAREN")
+        self.eat("LBRACE")
+
+        # Parse the if block
+        if_block = []
+        while self.current_token and self.current_token[0] != "RBRACE":
+            if_block.append(self.current_token)
+            self.advance()
+        self.eat("RBRACE")
+
+        if condition:
+            self.execute_block(if_block)
+
+            # Skip the else block if the condition is true
+            if self.current_token and self.current_token[0] == "ELSE":
+                self.skip_else_block()
+        else:
+            # Execute the else block if the condition is False
+            if self.current_token and self.current_token[0] == "ELSE":
+                self.parse_else()
+
+    def parse_else(self):
+        self.eat("ELSE")
+        self.eat("LBRACE")
+
+        # Parse the else block
+        else_block = []
+        while self.current_token and self.current_token[0] != "RBRACE":
+            else_block.append(self.current_token)
+            self.advance()
+        self.eat("RBRACE")
+
+        # Execute the else block
+        self.execute_block(else_block)
+
+    def skip_else_block(self):
+        self.eat("ELSE")
+        self.eat("LBRACE")
+
+        # Skip over the else block without executing it
+        while self.current_token and self.current_token[0] != "RBRACE":
+            self.advance()
+        self.eat("RBRACE")
+
+    def execute_block(self, block):
+        """Execute a block of code (list of tokens)."""
+        saved_tokens = self.tokens
+        saved_index = self.current_token_index
+        saved_current_token = self.current_token
+        saved_variables = self.variables.copy()
+
+        try:
+            # Set tokens for the block
+            self.tokens = block
+            self.current_token_index = 0
+            self.current_token = (
+                self.tokens[self.current_token_index] if self.tokens else None
+            )
+
+            # Parse the block as if it's a new script
+            self.parse()
+        finally:
+            # Restore the original state
+            self.tokens = saved_tokens
+            self.current_token_index = saved_index
+            self.current_token = saved_current_token
+            self.variables = saved_variables
+
     def parse(self):
         while self.current_token:
             if self.current_token[0] == "VARS":
@@ -319,6 +419,9 @@ class Parser:
                 self.parse_func()
             elif self.current_token[0] == "CALL":
                 self.parse_call()
-
+            elif self.current_token[0] == "IF":  # Check for IF statement
+                self.parse_if()
+            elif self.current_token[0] == "ELSE":  # Check for ELSE statement
+                self.parse_else()
             else:
                 self.advance()

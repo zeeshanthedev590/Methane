@@ -1,0 +1,7 @@
+cook x = 5
+when (x+1 > 5) {
+    puts("x is greater than 5")
+} 
+otherwise {
+    puts("x is not greater than 5")
+}

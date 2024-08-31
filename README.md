@@ -14,10 +14,11 @@
   - [x] File importing
     - [x] Variables
     - [x] Functions
-  - [ ] If/else statements
+  - [x] If/else statements
   - [ ] Loops
     - [ ] For loops
     - [ ] while loops
   - [ ] Arrays
   - [ ] Dictionaries
 - [x] Make the main interpreter interface
+- [ ] Make docs

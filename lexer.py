@@ -4,10 +4,10 @@ import re
 KEYWORDS = {
     "DEC": "FUNCS",
     "cook": "VARS",
-    "IF": "IF",
+    "when": "IF",
+    "otherwise": "ELSE",
     "WHILE": "WHILE",
     "FOR": "FOR",
-    "ELSE": "ELSE",
     "gets": "INPUT",
     "puts": "OUTPUT",
     "read": "READ",

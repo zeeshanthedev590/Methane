@@ -22,3 +22,6 @@
   - [ ] Dictionaries
 - [x] Make the main interpreter interface
 - [ ] Make docs
+- [ ] Networking
+- [ ] Interactive REPL (Read-Eval-Print Loop)
+- [ ] Object-Oriented Programming (OOP)

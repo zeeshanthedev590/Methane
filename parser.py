@@ -396,7 +396,8 @@ class Parser:
             self.current_token_index = saved_index
             self.current_token = saved_current_token
             self.variables = saved_variables
-
+    
+    
     def parse(self):
         while self.current_token:
             if self.current_token[0] == "VARS":

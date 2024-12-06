@@ -15,7 +15,7 @@
     - [x] Variables
     - [x] Functions
   - [x] If/else statements
-  - [x] Boolean logic 
+  - [ ] Boolean logic 
   - [ ] Loops
     - [ ] For loops
     - [ ] while loops

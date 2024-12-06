@@ -2,12 +2,12 @@ import re
 
 # Keywords and Tokens
 KEYWORDS = {
-    "DEC": "FUNCS",
+    "func": "FUNCS",
     "cook": "VARS",
     "when": "IF",
     "otherwise": "ELSE",
-    "WHILE": "WHILE",
-    "FOR": "FOR",
+    "while": "WHILE",
+    "for": "FOR",
     "gets": "INPUT",
     "puts": "OUTPUT",
     "read": "READ",
@@ -16,6 +16,8 @@ KEYWORDS = {
     "open": "OPEN",
     "bring": "IMPORT",
     "call": "CALL",
+    "bool":"BOOL",
+    "array":"array"
 }
 
 TOKENS = [

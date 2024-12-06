@@ -1,4 +1,4 @@
-DEC greet(a,b) {
+func greet(a,b) {
     cook x = a+b
   puts(x)
 }

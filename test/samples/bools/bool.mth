@@ -1,0 +1,4 @@
+cook x = false
+cook y = true
+puts(x)
+puts(y)

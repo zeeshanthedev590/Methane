@@ -73,6 +73,12 @@ class Parser:
                 raise ValueError(f"Undefined variable: {var_name}")
         elif token_type == "STRING":
             return self.eat("STRING").strip('"')
+        elif token_type == "TRUE":
+            self.eat("TRUE")
+            return True
+        elif token_type =="FALSE":
+            self.eat("FALSE")
+            return False
         else:
             raise ValueError(f"Unexpected token: {token_type}")
 
@@ -396,8 +402,7 @@ class Parser:
             self.current_token_index = saved_index
             self.current_token = saved_current_token
             self.variables = saved_variables
-    
-    
+     
     def parse(self):
         while self.current_token:
             if self.current_token[0] == "VARS":
@@ -424,5 +429,9 @@ class Parser:
                 self.parse_if()
             elif self.current_token[0] == "ELSE":  # Check for ELSE statement
                 self.parse_else()
+            elif self.current_token[0] == "BOOL":
+                self.parse_boolean()
             else:
                 self.advance()
+
+

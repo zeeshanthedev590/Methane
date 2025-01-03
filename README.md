@@ -15,7 +15,8 @@
     - [x] Variables
     - [x] Functions
   - [x] If/else statements
-  - [ ] Boolean logic 
+  - [x] Boolean logic
+  - [ ] Logical Operators
   - [ ] Loops
     - [ ] For loops
     - [ ] while loops
@@ -25,4 +26,4 @@
 - [ ] Make docs
 - [ ] Networking
 - [ ] Interactive REPL (Read-Eval-Print Loop)
-- [ ] Object-Oriented Programming (OOP)
+- [ ] Object-Oriented Programming (OOP) (optional)

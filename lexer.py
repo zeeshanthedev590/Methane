@@ -16,8 +16,9 @@ KEYWORDS = {
     "open": "OPEN",
     "bring": "IMPORT",
     "call": "CALL",
-    "bool":"BOOL",
-    "array":"array"
+    "array":"array",
+    "true": "TRUE",
+    "false": "FALSE",
 }
 
 TOKENS = [
@@ -45,6 +46,7 @@ TOKENS = [
     ("COMMENTS", r"#.*"),
     ("AMPERSAND", r"&"),
     ("ID", r"[a-zA-Z_][a-zA-Z0-9_]*"),
+
 ]
 
 # Combine Tokens
